@@ -21,8 +21,10 @@ class Login extends BaseController
         try {
 			$phone_number = (string)$this->request->getPostGet('phone_number');
 			$password = (string)$this->request->getPostGet('password');
-          
-            if ($phone_number != '' && $password != '') {
+            $checkauth= $this->authkey_setting();
+            if($checkauth == "1"){
+             
+                if ($phone_number != '' && $password != '') {
                
                     // $arr = array( "a"=>"Dosai-50% offer", "b"=>"Idly-50% offer", "c"=>"Snacks-50% offer", "d"=>"Starters-50% offer" );
                     // $key = array_rand($arr);
@@ -51,6 +53,11 @@ class Login extends BaseController
                 $this->returnResponse['response'] = $this->get_api_error(400);
             }
 
+        }else{
+            $this->returnResponse['response'] = $this->get_api_error(403);
+        }
+
+
         } catch (MongoException $ex) {
             $this->returnResponse['response'] = $this->get_api_error(401);
         }
@@ -62,38 +69,38 @@ class Login extends BaseController
 
 
 
-    public function updateoffer_status() {
-        try {
-			$user_id = (string)$this->request->getPostGet('user_id');
-			$phone_number = (string)$this->request->getPostGet('phone_number');
+    // public function updateoffer_status() {
+    //     try {
+	// 		$user_id = (string)$this->request->getPostGet('user_id');
+	// 		$phone_number = (string)$this->request->getPostGet('phone_number');
 
-            if ($phone_number != '' && $user_id!="" ) {
+    //         if ($phone_number != '' && $user_id!="" ) {
 
 
-                $condition = ['claimstatus'=>0,'userid'=>$user_id];
-                $getpost = $this->UserofferModel->get_all_details("useroffer", $condition);
+    //             $condition = ['claimstatus'=>0,'userid'=>$user_id];
+    //             $getpost = $this->UserofferModel->get_all_details("useroffer", $condition);
              
-                if (sizeof($getpost) >= 1) {
+    //             if (sizeof($getpost) >= 1) {
 
-                    $cond = ['userid'=>$user_id];
-                    $update_data= ['claimstatus' => 1];
-                    $this->UserofferModel->update_data("useroffer", $update_data,$cond);
-                    $this->returnResponse['status'] = '1';
-                    $this->returnResponse['response'] ="Sucessfully claimed";
-                } else {
-                    $this->returnResponse['response'] ="Already claimed";
-                }
+    //                 $cond = ['userid'=>$user_id];
+    //                 $update_data= ['claimstatus' => 1];
+    //                 $this->UserofferModel->update_data("useroffer", $update_data,$cond);
+    //                 $this->returnResponse['status'] = '1';
+    //                 $this->returnResponse['response'] ="Sucessfully claimed";
+    //             } else {
+    //                 $this->returnResponse['response'] ="Already claimed";
+    //             }
                
-            } else {
-                $this->returnResponse['response'] = $this->get_api_error(400);
-            }
+    //         } else {
+    //             $this->returnResponse['response'] = $this->get_api_error(400);
+    //         }
 
-        } catch (MongoException $ex) {
-            $this->returnResponse['response'] = $this->get_api_error(401);
-        }
-        return $this->setResponseFormat('json')->respond($this->returnResponse, 200);
+    //     } catch (MongoException $ex) {
+    //         $this->returnResponse['response'] = $this->get_api_error(401);
+    //     }
+    //     return $this->setResponseFormat('json')->respond($this->returnResponse, 200);
 
-    }
+    // }
 
 
 
@@ -102,3 +109,4 @@ class Login extends BaseController
 
 
 }
+

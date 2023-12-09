@@ -14,7 +14,8 @@ return [
     'otp_invalid'=>"Otp Expired",
     'resend'=>"Something wrong",
     'logged_out_successfully'=>"Logged Out Successfully",
-    'no_data'=>"No data available"
+    'no_data'=>"No data available",
+    "admin_user"=>"Check your password or phonenumber"
 
    
 ];

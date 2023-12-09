@@ -9,6 +9,7 @@ use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
 use App\Helpers\TwilioHelper;
+use chillerlan\QRCode\QRCode;
 
 date_default_timezone_set('Asia/Kolkata');
 
@@ -47,6 +48,13 @@ abstract class BaseController extends Controller
     protected $LoginModel;
     protected $UserofferModel;
     protected $LoginhistoryModel;
+    protected $AdminUserModel;
+	protected $AdminLoginHisModel;
+	protected $CustomerModel;
+	protected $CouponCustomerModel;
+	protected $BranchModel;
+
+	
 
     // protected $TwilioService;
 
@@ -70,6 +78,15 @@ abstract class BaseController extends Controller
 		$this->UserofferModel = new \App\Models\UserofferModel();
 		$this->LoginModel = new \App\Models\LoginModel();
 		$this->LoginhistoryModel = new \App\Models\LoginhistoryModel();
+		$this->AdminUserModel = new \App\Models\AdminUserModel();
+		$this->AdminLoginHisModel = new \App\Models\AdminLoginHisModel();
+		$this->CustomerModel = new \App\Models\CustomerModel();
+		$this->CouponCustomerModel = new \App\Models\CouponCustomerModel();
+
+		$this->BranchModel = new \App\Models\BranchModel();
+
+
+
 
 		
         $this->request = \Config\Services::request();
@@ -90,7 +107,48 @@ abstract class BaseController extends Controller
 	}
 
 
-    
+	public  function authkey_setting(){
+        $response = service('response');
+        $request = service('request');
+        $authheader = $request->getHeader('Authkey');
+        $userheader = $request->getHeader('Usertype');
+            $headers = $this->request->headers();
+            array_walk($headers, function(&$value, $key) {
+                $value = $value->getValue();
+            });
+
+         
+            if($authheader =="" || $userheader==""){
+                $status="Authentication Failure";
+                  return $status;
+            }else{
+                if( $headers['Usertype']=='uSer'&& $headers['Authkey']=='ABC123'){
+                   $status="1";
+                   $this->authheader= $headers['Usertype'];
+                   $this->userheader= $headers['Authkey'];
+                   return $status;
+                }elseif( $headers['Usertype']=='aDmin'&& $headers['Authkey']=='ABC123'){
+                  $status="1";
+                  $this->authheader= $headers['Usertype'];
+                  $this->userheader= $headers['Authkey'];
+                  return $status;
+                }elseif( $headers['Usertype']=='cAptain'&& $headers['Authkey']=='ABC123'){
+					$status="1";
+					$this->authheader= $headers['Usertype'];
+					$this->userheader= $headers['Authkey'];
+					return $status;
+				  }elseif( $headers['Usertype']=='bIller'&& $headers['Authkey']=='ABC123'){
+					$status="1";
+					$this->authheader= $headers['Usertype'];
+					$this->userheader= $headers['Authkey'];
+					return $status;
+				  }else{
+                  $status="0";
+                  return $status;
+                }
+            }
+    }
+
 
 
 	public function UUID4() {
@@ -104,6 +162,61 @@ abstract class BaseController extends Controller
 		return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
 	}
 
+
+    public function generateQRCode($data)
+    {
+        // Create a QRCode instance
+        $qrcode = new QRCode();
+        // Set additional options if needed
+        // $qrcode->setModuleValues([1, 255]);
+        // $qrcode->setSize(300);
+        
+        // Generate the QR code as a PNG image
+        $image = $qrcode->render($data);
+
+        // Output the QR code image
+        // header('Content-Type: image/png');
+        $this->returnResponse['response'] = [
+            "message" => lang('app.success'),
+            "data" =>$image,
+        ];
+        return $this->setResponseFormat('json')->respond($this->returnResponse, 200);
+
+
+        
+    }
+
+
+
+
+	public function get_password($str, $len = 0) { 
+      
+		// Variable $pass to store password 
+		$pass = ""; 
+		  
+		// Variable $str_length to store  
+		// length of the given string 
+		$str_length = strlen($str); 
+	   
+		// Check if the $len is not provided 
+		// or $len is greater than $str_length 
+		// then assign $str_length to $len 
+		if($len == 0 || $len > $str_length){ 
+			$len = $str_length; 
+		} 
+	   
+		// Iterate $len times so that the  
+		// resulting string's length is  
+		// equal to $len 
+		for($i = 0;  $i < $len; $i++){ 
+			  
+			// Concatenate random character  
+			// from $str with $pass 
+			$pass .=  $str[rand(0, $str_length)]; 
+		} 
+		print_r($pass);
+		return $pass; 
+	} 
 
    
 
