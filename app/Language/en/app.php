@@ -17,7 +17,8 @@ return [
     'no_data'=>"No data available",
     "admin_user"=>"Check your password or phonenumber",
     "coupon_gen"=>"Coupon genereated Successfuly",
-    "pass_change"=>"Password changed Successfuly"
+    "pass_change"=>"Password changed Successfuly",
+    'update_success'=>"Updated Successfully"
 
 
    

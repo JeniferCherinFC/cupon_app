@@ -384,7 +384,7 @@ class UserController extends BaseController
 
     public function editprofile() {
         try {
-            $phone_number = ( string )$this->request->getPostGet( 'phone_number' );
+            $userid = ( string )$this->request->getPostGet( 'userid' );
             $name = ( string )$this->request->getPostGet( 'name' );
             $email = ( string )$this->request->getPostGet( 'email' );
             $location = ( string )$this->request->getPostGet( 'location' );
@@ -395,9 +395,9 @@ class UserController extends BaseController
             $country = ( string )$this->request->getPostGet( 'country' );
             $checkauth = $this->authkey_setting();
             if ( $checkauth == '1' ) {
-                if ( $phone_number != '' && $name != '' && $email != '' && $location != '' && $address != '' && $city != '' && $state != '' && $pincode != '' && $country != '' ) {
+                if ( $userid!='' && $name != '' && $email != '' && $location != '' && $address != '' && $city != '' && $state != '' && $pincode != '' && $country != '' ) {
                    
-                    $condition = array( 'phone' => $phone_number );
+                    $condition = array( 'userid' => $userid );
                     $checkUser = $this->CustomerModel->get_selected_fields( 'customers', $condition, array( 'userid' ) );
 
                     if ( sizeof( $checkUser ) == 1 ) {
@@ -417,7 +417,7 @@ class UserController extends BaseController
                         $this->CustomerModel->update_data( 'customers', $update_data, array( 'userid'=>$userarr[ 'userid' ] ) );
 
                         $this->returnResponse[ 'status' ] = '1';
-                        $this->returnResponse[ 'response' ] = lang( 'app.success' );
+                        $this->returnResponse[ 'response' ] = lang( 'app.update_success' );
                     } else {
                         $this->returnResponse[ 'response' ] = lang( 'app.invalid_user' );
                     }
