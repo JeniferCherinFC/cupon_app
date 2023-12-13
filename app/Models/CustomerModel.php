@@ -14,7 +14,8 @@ class CustomerModel extends BaseModel
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'id', 'name', 'phone', 'userid', 'email', 'location', 'customerbranch', 'address', 'city', 'state', 'country', 'pincode', 'password', 'photourl','lastlogoutDate'
+        'id', 'name', 'phone', 'userid', 'email', 'location', 'customerbranch',
+         'address', 'city', 'state', 'country', 'pincode', 'password', 'photourl','lastlogoutDate','updatedat'
     ];
 
     // Dates
