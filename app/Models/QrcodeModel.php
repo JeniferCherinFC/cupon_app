@@ -4,9 +4,9 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class CouponCustomerModel extends BaseModel {
+class QrcodeModel extends BaseModel {
     protected $DBGroup          = 'default';
-    protected $table            = 'couponcustomers';
+    protected $table            = 'qrcodes';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
@@ -15,25 +15,16 @@ class CouponCustomerModel extends BaseModel {
     protected $allowedFields    = [
 
         'id',
-        'customerPhone',
-        'couponSourcebranch',
-        'couponCode',
-        'subId',
-        'couponvalidityStart',
-        'couponvalidityEnd',
-        'cuponType',
-        'isBreakfast',
-        'isLunch',
-        'isDinner',
-        'allowedCouponPerclaim',
-        'allowedCouponPerday',
-        'purchaseddate',
+        'customerphone',
+        'QR',
+        'qrId',
+        'couponType',
         'isActive',
-        'createdby',
-        'modeofpayment',
-        'amountPaid',
-        'paymentDetail',
-        'remarks'
+        'IsClaimed',
+        'claimedbranch',
+        'adminuser',
+        'claimeddate'
+
     ];
 
     // Dates

@@ -10,8 +10,13 @@ use CodeIgniter\Router\RouteCollection;
 // $routes->post('api/offerstatus', 'SampleDetails::updateoffer_status',['namespace' => 'App\Controllers\Offerdata']);
 
 //user
-$routes->post('api/login', 'Login::login',['namespace' => 'App\Controllers\User']);
-
+$routes->post('api/login', 'UserController::login',['namespace' => 'App\Controllers\User']);
+$routes->post('api/getcoupondetails', 'UserController::get_coupondetails',['namespace' => 'App\Controllers\User']);
+$routes->post('api/getAcoupons', 'UserController::get_couponAvailable_details',['namespace' => 'App\Controllers\User']);
+$routes->post('api/getUcoupons', 'UserController::get_couponUsed_details',['namespace' => 'App\Controllers\User']);
+$routes->post('api/getSubdetails', 'UserController::get_subscription_details',['namespace' => 'App\Controllers\User']);
+$routes->post('api/changepassword', 'UserController::changepassword',['namespace' => 'App\Controllers\User']);
+$routes->post('api/logout', 'UserController::logout',['namespace' => 'App\Controllers\User']);
 
 //admin
 $routes->post('api/adlogin', 'AdminController::admin_login',['namespace' => 'App\Controllers\Admin']);

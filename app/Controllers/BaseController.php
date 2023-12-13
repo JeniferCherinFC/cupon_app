@@ -53,6 +53,7 @@ abstract class BaseController extends Controller
 	protected $CustomerModel;
 	protected $CouponCustomerModel;
 	protected $BranchModel;
+	protected $QrcodeModel;
 
 	
 
@@ -82,7 +83,9 @@ abstract class BaseController extends Controller
 		$this->AdminLoginHisModel = new \App\Models\AdminLoginHisModel();
 		$this->CustomerModel = new \App\Models\CustomerModel();
 		$this->CouponCustomerModel = new \App\Models\CouponCustomerModel();
+		$this->QrcodeModel = new \App\Models\QrcodeModel();
 
+		
 		$this->BranchModel = new \App\Models\BranchModel();
 
 
@@ -97,6 +100,8 @@ abstract class BaseController extends Controller
 
         $response = service('response');
         $request = service('request');
+		
+
     
         // $headers = $request->getHeader('Authkey');
         // $response->setHeader('Authkey', $headers);
@@ -176,11 +181,13 @@ abstract class BaseController extends Controller
 
         // Output the QR code image
         // header('Content-Type: image/png');
-        $this->returnResponse['response'] = [
-            "message" => lang('app.success'),
-            "data" =>$image,
-        ];
-        return $this->setResponseFormat('json')->respond($this->returnResponse, 200);
+        // $this->returnResponse['response'] = [
+        //     "message" => lang('app.success'),
+        //     "data" =>$image,
+        // ];
+
+		return $image;
+        // return $this->setResponseFormat('json')->respond($this->returnResponse, 200);
 
 
         
@@ -189,34 +196,47 @@ abstract class BaseController extends Controller
 
 
 
-	public function get_password($str, $len = 0) { 
+	public function get_subid($str, $len = 0) { 
       
-		// Variable $pass to store password 
 		$pass = ""; 
-		  
-		// Variable $str_length to store  
-		// length of the given string 
 		$str_length = strlen($str); 
-	   
-		// Check if the $len is not provided 
-		// or $len is greater than $str_length 
-		// then assign $str_length to $len 
 		if($len == 0 || $len > $str_length){ 
 			$len = $str_length; 
 		} 
-	   
-		// Iterate $len times so that the  
-		// resulting string's length is  
-		// equal to $len 
 		for($i = 0;  $i < $len; $i++){ 
-			  
-			// Concatenate random character  
-			// from $str with $pass 
 			$pass .=  $str[rand(0, $str_length)]; 
 		} 
-		print_r($pass);
 		return $pass; 
 	} 
+
+
+
+		public	function generatePassword($length) {
+			$uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+			$lowercase = 'abcdefghijklmnopqrstuvwxyz';
+			$numbers = '0123456789';
+		
+			$characters = $uppercase . $lowercase . $numbers;
+			$charLength = strlen($characters) - 1;
+		
+			// Add one uppercase letter
+			$password = $uppercase[mt_rand(0, strlen($uppercase) - 1)];
+		
+			// Add a mix of numbers and lowercase letters
+			for ($i = 1; $i < $length - 1; $i++) {
+				$randIndex = mt_rand(0, $charLength);
+				$password .= $characters[$randIndex];
+			}
+		
+			// Add one number
+			$password .= $numbers[mt_rand(0, strlen($numbers) - 1)];
+		
+			return $password ; // Shuffle the password to randomize character positions
+		}
+		
+	
+
+
 
    
 

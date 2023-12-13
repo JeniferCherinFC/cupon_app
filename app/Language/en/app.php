@@ -15,7 +15,10 @@ return [
     'resend'=>"Something wrong",
     'logged_out_successfully'=>"Logged Out Successfully",
     'no_data'=>"No data available",
-    "admin_user"=>"Check your password or phonenumber"
+    "admin_user"=>"Check your password or phonenumber",
+    "coupon_gen"=>"Coupon genereated Successfuly",
+    "pass_change"=>"Password changed Successfuly"
+
 
    
 ];

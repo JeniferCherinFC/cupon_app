@@ -60,7 +60,6 @@ public  function __construct()
 		$builder = $this->db->table($table);
 		$builder->select('*');
 		$builder->where($array);
-		$query = $builder->get();
 		$result=$builder->countAllResults();
 		return !empty($result)?$result:0;
       
