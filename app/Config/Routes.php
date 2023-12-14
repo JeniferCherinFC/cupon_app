@@ -7,7 +7,9 @@ use CodeIgniter\Router\RouteCollection;
 
 
 // $routes->post('api/createdata', 'SampleDetails::create_data',['namespace' => 'App\Controllers\Offerdata']);
-// $routes->post('api/offerstatus', 'SampleDetails::updateoffer_status',['namespace' => 'App\Controllers\Offerdata']);
+$routes->post('api/qrUpdate', 'OfferDetails::updateqr_status',['namespace' => 'App\Controllers\Offerdata']);
+$routes->post('api/admincoupon', 'OfferDetails::admincoupon_details',['namespace' => 'App\Controllers\Offerdata']);
+
 
 //user
 $routes->post('api/login', 'UserController::login',['namespace' => 'App\Controllers\User']);

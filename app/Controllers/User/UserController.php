@@ -10,7 +10,7 @@ class UserController extends BaseController
     use ResponseTrait;
 
     public function __construct()
- {
+    {
         parent::__construct();
         $this->returnResponse = [ 'status' => '0', 'response' => '' ];
 
@@ -57,38 +57,6 @@ class UserController extends BaseController
         return $this->setResponseFormat( 'json' )->respond( $this->returnResponse, 200 );
 
     }
-
-    // public function updateoffer_status() {
-    //     try {
-    // 		$user_id = ( string )$this->request->getPostGet( 'user_id' );
-    // 		$phone_number = ( string )$this->request->getPostGet( 'phone_number' );
-
-    //         if ( $phone_number != '' && $user_id != '' ) {
-
-    //             $condition = [ 'claimstatus'=>0, 'userid'=>$user_id ];
-    //             $getpost = $this->UserofferModel->get_all_details( 'useroffer', $condition );
-
-    //             if ( sizeof( $getpost ) >= 1 ) {
-
-    //                 $cond = [ 'userid'=>$user_id ];
-    //                 $update_data = [ 'claimstatus' => 1 ];
-    //                 $this->UserofferModel->update_data( 'useroffer', $update_data, $cond );
-    //                 $this->returnResponse[ 'status' ] = '1';
-    //                 $this->returnResponse[ 'response' ] = 'Sucessfully claimed';
-    //             } else {
-    //                 $this->returnResponse[ 'response' ] = 'Already claimed';
-    //             }
-
-    //         } else {
-    //             $this->returnResponse[ 'response' ] = $this->get_api_error( 400 );
-    //         }
-
-    //     } catch ( MongoException $ex ) {
-    //         $this->returnResponse[ 'response' ] = $this->get_api_error( 401 );
-    //     }
-    //     return $this->setResponseFormat( 'json' )->respond( $this->returnResponse, 200 );
-
-    // }
 
     public function get_coupondetails() {
         $phone_number = ( string )$this->request->getPostGet( 'phone_number' );
@@ -165,7 +133,7 @@ class UserController extends BaseController
 
                 if ( $phone_number != '' && $coupon_type != '' ) {
 
-                    $Acond = [ 'customerphone'=>$phone_number, 'isClaimed'=>1, 'couponType'=>$coupon_type ];
+                    $Acond = [ 'customerphone'=>$phone_number, 'isClaimed'=>1, 'isActive'=>1 ,'couponType'=>$coupon_type ];
                     $totalAvailable = $this->QrcodeModel->get_all_counts( 'qrcodes', $Acond );
                     $getAvailable = $this->QrcodeModel->get_all_details( 'qrcodes', $Acond );
 
@@ -206,7 +174,7 @@ class UserController extends BaseController
 
                 if ( $phone_number != '' && $coupon_type != '' ) {
 
-                    $Acond = [ 'customerphone'=>$phone_number, 'isClaimed'=>0, 'couponType'=>$coupon_type ];
+                    $Acond = [ 'customerphone'=>$phone_number, 'isClaimed'=>0,'isActive'=>0, 'couponType'=>$coupon_type ];
                     $totalUsed = $this->QrcodeModel->get_all_counts( 'qrcodes', $Acond );
                     $getUsed = $this->QrcodeModel->get_all_details( 'qrcodes', $Acond );
 

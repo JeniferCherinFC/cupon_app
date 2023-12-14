@@ -23,7 +23,8 @@ class QrcodeModel extends BaseModel {
         'IsClaimed',
         'claimedbranch',
         'adminuser',
-        'claimeddate'
+        'claimeddate',
+        'claimedtime'
 
     ];
 
@@ -50,4 +51,11 @@ class QrcodeModel extends BaseModel {
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+
+
+
+
 }
+
+

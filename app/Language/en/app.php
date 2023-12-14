@@ -18,7 +18,10 @@ return [
     "admin_user"=>"Check your password or phonenumber",
     "coupon_gen"=>"Coupon genereated Successfuly",
     "pass_change"=>"Password changed Successfuly",
-    'update_success'=>"Updated Successfully"
+    'update_success'=>"Updated Successfully",
+    'coupon_success'=>"Successfully claimed",
+    'invalid_qr'=>"Invalid Qrcode",
+    'already_claim'=>"Already claimed"
 
 
    
