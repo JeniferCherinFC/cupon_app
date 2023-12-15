@@ -24,7 +24,7 @@ class UserController extends BaseController
             if ( $checkauth == '1' ) {
 
                 if ( $phone_number != '' && $password != '' ) {
-                    $condition = [ 'phone'=>$phone_number ];
+                    $condition = [ 'phone'=>$phone_number,'password'=>$password ];
                     $getdetail = $this->UserofferModel->get_all_details( 'customers', $condition );
 
                     if ( sizeof( $getdetail ) == 1 ) {
