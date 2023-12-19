@@ -21,7 +21,8 @@ return [
     'update_success'=>"Updated Successfully",
     'coupon_success'=>"Successfully claimed",
     'invalid_qr'=>"Invalid Qrcode",
-    'already_claim'=>"Already claimed"
+    'already_claim'=>"Already claimed",
+    'restrict_claim'=>"Oops!.. You can Use only two Coupons for "
 
 
    

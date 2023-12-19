@@ -110,9 +110,69 @@ class AdminController extends BaseController
                     if(sizeof($getbranch)==1){
                         $isbranch=$getbranch[0];
                         $branchcode=$isbranch['branch_code'];
-                        // if(sizeof($getdetail)>=1){
-                        //     $this->returnResponse['response'] = lang('app.phone_number_exist');
-                        //    }else{
+
+                        if(sizeof($getdetail)>=1){
+
+
+                            // if($isBreakfast==1){
+
+                            //     $type1="Breakfast";
+                            //     $this->generate_coupon($startdate,$enddate,$type1,$phone_number);
+                            
+                            // }else{
+                            //     $type1="";
+                            // }
+
+                            // if($isLunch==1){
+                            //     $type2="Lunch";
+                            //     $this->generate_coupon($startdate,$enddate,$type2,$phone_number);
+
+                               
+                            // }
+                            // else{
+                            //     $type2="";
+                            // }
+
+                            // if($isDinner==1){
+                            //     $type3="Dinner";
+                            //     $this->generate_coupon($startdate,$enddate,$type3,$phone_number);
+                            // }else{
+                            //     $type3="";
+                            // }
+
+
+                            // $coupontype="$type1"."$type2"."$type3"; 
+
+                            // $data="$branchcode".","."$coupontype";
+                            // $couponcodegeneration= $this->generateQRCode($data);
+
+                            //  $str="ABCDEFGHIJKL1234567890MNOPQRSTUVWXYZ";
+                            //  $Id=$this->get_subid($str,6);
+                            //  $subId="SUB".$Id;
+
+                            //  $stimestamp = strtotime($startdate);
+                            //  $etimestamp = strtotime($enddate);
+
+                            // $Dataarr=[
+                            //     'customerPhone'=>$phone_number,
+                            //     'couponSourcebranch'=>$branchcode,
+                            //     'couponCode'=>(string)$couponcodegeneration,
+                            //     'couponvalidityStart'=>date('Y-m-d',$stimestamp),
+                            //     'couponvalidityEnd'=>date('Y-m-d',$etimestamp),
+                            //     'cuponType'=>$coupontype,
+                            //     'isBreakfast'=>$isBreakfast,
+                            //     'isLunch'=>$isLunch,
+                            //     'isDinner'=>$isDinner,
+                            //     'purchaseddate'=>date('Y-m-d'),
+                            //     'createdby'=>$createdby,
+                            //     'modeofpayment'=>$paymentmode,
+                            //     'amountPaid'=>$amountpaid,
+                            //     'subId'=>$subId
+                            // ];
+
+                            //  $this->CouponCustomerModel->insert_data($Dataarr);
+                            $this->returnResponse['response'] = lang('app.phone_number_exist');
+                           }else{
     
                             $userid=$this->UUID4();
                             $password= $this->generatePassword(8);  
@@ -194,7 +254,7 @@ class AdminController extends BaseController
                                  "message" => lang('app.coupon_gen'),
                                  "data" =>$password,
                              ];
-                        //    } 
+                           } 
                    
 
                     }else{
