@@ -291,7 +291,9 @@ class AdminController extends BaseController
            
             for ($i = 1; $i <= $daysCount; $i++) {
                 $qr_id=$this->UUID4();
-                $data="$phone".","."$couponType".","."$qr_id";
+                // $data="$phone".","."$couponType".","."$qr_id";
+                $data=$qr_id;
+
                 $couponcodegenerations= $this->generateQRCode($data);
 
                     $coupondata=[
